@@ -39,16 +39,20 @@
 
     ];//hotels
 
-    // $filteredHotels = $hotels;
+    $filteredHotels = $hotels;
 
-    if ($_GET['park'] != '') {
-        $filteredHotels = array_filter($hotels, function ($Item) {
-            $park = $Item['parking'] ? 'true' : 'false';
-            return $park == $_GET['park'];
-        }, ARRAY_FILTER_USE_BOTH);
-    }
-    else {
-        $filteredHotels = $hotels;
+    if ($_GET['park'] != '' ) {
+        $filteredHotels = array_filter($filteredHotels, function ($hotel) {
+            $park = $hotel['parking'] ? 'true' : 'false';
+            return ($park == $_GET['park']) ;
+        });
+    };
+
+    if ($_GET['vote'] != '' ) {
+        $filteredHotels = array_filter($filteredHotels, function ($hotel) {
+            $intVote = strval($hotel['vote']);
+            return ($intVote >= $_GET['vote']);
+        });
     };
 ?>
 
@@ -83,9 +87,22 @@
                                 Filtra per parcheggio:
                             </label>
                             <select name="park" id="park-select" class="form-control w-25">
-                                <option value="" selected>Selezione un opzione</option>
+                                <option value="" selected>Seleziona un opzione</option>
                                 <option value="true">SI</option>
                                 <option value="false">NO</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="vote-select" class="form-label">
+                                Filtra per valutazione:
+                            </label>
+                            <select name="vote" id="vote-select" class="form-control w-25">
+                                <option value="" selected>Seleziona un opzione</option>
+                                <?php
+                                    for ($i = 1; $i <= 5; $i++) {
+                                        echo "<option value=\"$i\">$i</option>";
+                                    }                                    
+                                ?>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">
