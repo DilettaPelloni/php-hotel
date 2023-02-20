@@ -39,7 +39,17 @@
 
     ];//hotels
 
-    $filteredHotels = [];
+    // $filteredHotels = $hotels;
+
+    if ($_GET['park'] != '') {
+        $filteredHotels = array_filter($hotels, function ($Item) {
+            $park = $Item['parking'] ? 'true' : 'false';
+            return $park == $_GET['park'];
+        }, ARRAY_FILTER_USE_BOTH);
+    }
+    else {
+        $filteredHotels = $hotels;
+    };
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +98,7 @@
             <div class="container-lg">
                 <div class="row">
                 <?php
-                    foreach ($hotels as $hotel) {
+                    foreach ($filteredHotels as $hotel) {
                         echo '<div class="col-4">';
                             echo '<div class="card mb-5">';
                                 echo '<div class="card-header">';
