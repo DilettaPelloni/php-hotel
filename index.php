@@ -38,6 +38,8 @@
         ],
 
     ];//hotels
+
+    $filteredHotels = [];
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +63,28 @@
         </header>
 
         <main class="py-5">
+
+            <section class="pb-5">
+                <div class="container-lg">
+                    <h3>Filtra la tua ricerca</h3>
+                    <form method="get">
+                        <div class="mb-3">
+                            <label for="park-select" class="form-label">
+                                Filtra per parcheggio:
+                            </label>
+                            <select name="park" id="park-select" class="form-control w-25">
+                                <option value="" selected>Selezione un opzione</option>
+                                <option value="true">SI</option>
+                                <option value="false">NO</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Filtra
+                        </button>
+
+                    </form>
+                </div>
+            </section>
             <div class="container-lg">
                 <div class="row">
                 <?php
