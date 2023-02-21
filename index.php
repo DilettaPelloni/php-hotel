@@ -108,62 +108,57 @@
                         <button type="submit" class="btn btn-primary">
                             Filtra
                         </button>
-
                     </form>
-                </div>
+                </div><!-- CHIUSURA CONTAINER -->
             </section>
             <div class="container-lg">
                 <div class="row">
-                <?php
-                    foreach ($filteredHotels as $hotel) {
-                        echo '<div class="col-4">';
-                            echo '<div class="card mb-5">';
-                                echo '<div class="card-header">';
-                                    echo "<h4 class=\"card-title\"> $hotel[name] </h4>";
-                                echo '</div>';//chiusura card header
-                                echo '<div class="card-body">';
+                <?php foreach ($filteredHotels as $hotel) { ?>
+                    <div class="col-4">
+                        <div class="card mb-5">
+                            <div class="card-header">
+                                <h4 class="card-title"> <?php echo $hotel['name'];?></h4>
+                            </div><!-- CHIUSURA CARD HEADER -->
+                            <div class="card-body">
+                                <!-- DESCRIZIONE -->
+                                <h6 class="m-0 fw-bold"> Descrizione: </h6>
+                                <p class="card-text">
+                                    <?php echo $hotel['description'];?>
+                                </p>
+                                <!-- PARCHEGGIO -->
+                                <p class="card-text m-0">
+                                    <span class="fw-bold">
+                                        L'hotel offre parcheggio:
+                                    </span>
+                                    <?php    
+                                        echo ($hotel['parking']) ? 'si' : 'no';
+                                    ?>
+                                </p>
+                                <!-- VALUTAZIONE -->
+                                <p class="card-text m-0">
+                                    <span class="fw-bold">
+                                        Valutazione: 
+                                    </span>
+                                    <?php 
+                                        echo $hotel['vote'];
+                                    ?>
+                                </p>
+                                <!-- DISTANZA -->
+                                <p class="card-text m-0">
+                                    <span class="fw-bold">
+                                        Distanza dal centro: 
+                                    </span>
+                                    <?php 
+                                        echo $hotel['distance_to_center'].' km'
+                                    ?>
+                                </p>
 
-                                    echo '<h6 class="m-0 fw-bold"> Descrizione: </h6>';
-                                    echo "<p class=\"card-text\">  $hotel[description] </p>";
-                                    
-                                    $parking = ($hotel['parking']) ? 'si' : 'no';
-                                    echo "<p class=\"card-text m-0\">
-                                        <span class=\"fw-bold\">
-                                            L'hotel offre parcheggio:
-                                        </span>    
-                                        $parking
-                                    </p>";
-
-                                    echo "<p class=\"card-text m-0\">
-                                        <span class=\"fw-bold\">
-                                                Valutazione: 
-                                        </span>
-                                        $hotel[vote]
-                                    </p>";
-
-                                    echo "<p class=\"card-text m-0\">
-                                        <span class=\"fw-bold\">
-                                                Distanza dal centro: 
-                                        </span>
-                                        $hotel[distance_to_center] km
-                                    </p>";
-
-                                echo '</div>';//chiusura card body 
-                            echo '</div>';//chiusura card
-                        echo '</div>';//chiusura col
-                    };
-                ?>
+                            </div><!-- CHIUSURA CARD BODY --> 
+                        </div><!-- CHIUSURA CARD -->
+                    </div><!-- CHIUSURA COL -->
+                <?php }; ?>
                 </div><!-- CHIUSURA ROW -->
             </div><!-- CHIUSURA CONTAINER -->
         </main>
     </body>
 </html>
-
-
-<!-- echo '<ul>';
-    echo "<li> Descrizione: $hotel[description] </li>";
-    
-    echo "<li>Ha parcheggio: $parking</li>";
-    echo "<li> Voto: $hotel[vote] </li>";
-    echo "<li> Distanza dal centro: $hotel[distance_to_center] </li>";
-echo '</ul>'; -->
